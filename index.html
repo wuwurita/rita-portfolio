@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吳雙 Rita Wu | Mobile & Social Media Manager</title>
+<meta name="description" content="媒體出身的行銷人 — 家樂福 5 年資歷，從廣告企劃、市場洞察到社群經理，橫跨電視媒體與零售品牌的完整歷練">
+<meta property="og:title" content="吳雙 Rita Wu | Mobile & Social Media Manager">
+<meta property="og:description" content="媒體出身的行銷人｜家樂福 5 年資歷｜從 TVBS 節目製作到零售品牌社群經理">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FFD600;
+  --gold: #F5A623;
+  --amber: #FF8C00;
+  --cyan: #00E5FF;
+  --white: #FFFDF0;
+  --abyss: #0A1628;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Nunito', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--abyss);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--yellow);
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  top: 0; left: 0;
+  transition: transform 0.08s;
+  box-shadow: 0 0 8px var(--yellow);
+}
+#cursor-ring {
+  width: 28px; height: 28px;
+  border: 2px solid rgba(255,214,0,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  top: -14px; left: -14px;
+  transition: transform 0.15s, width 0.2s, height 0.2s;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #030A12; }
+::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, border-color 0.4s;
+}
+nav.scrolled {
+  background: rgba(3,10,18,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,214,0,0.2);
+}
+.nav-logo {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: var(--yellow);
+  text-shadow: 0 0 14px rgba(255,214,0,0.6);
+  letter-spacing: 2px;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+  cursor: none;
+}
+.nav-links a:hover { color: var(--yellow); }
+
+/* ===== DEPTH METER ===== */
+.depth-meter {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.depth-value {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--yellow);
+  text-shadow: 0 0 6px var(--yellow);
+}
+.depth-track {
+  width: 3px;
+  height: 180px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+.depth-fill {
+  width: 3px;
+  background: linear-gradient(180deg, var(--yellow), var(--cyan));
+  position: absolute;
+  top: 0; left: 0;
+  height: 0%;
+  transition: height 0.3s ease;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255,214,0,0.5);
+}
+.depth-pip {
+  width: 11px; height: 11px;
+  background: var(--yellow);
+  position: absolute;
+  left: -4px;
+  top: 0%;
+  transition: top 0.3s ease;
+  box-shadow: 0 0 12px var(--yellow);
+}
+.depth-label {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 3px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* ===== BUBBLES ===== */
+#bubbles-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  overflow: hidden;
+}
+.bubble {
+  position: absolute;
+  bottom: -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.25);
+  animation: bubbleRise linear infinite;
+}
+@keyframes bubbleRise {
+  0%   { transform: translateY(0) translateX(0px);   opacity: 0.7; }
+  40%  { transform: translateY(-38vh) translateX(18px); opacity: 0.5; }
+  80%  { transform: translateY(-78vh) translateX(-10px); opacity: 0.2; }
+  100% { transform: translateY(-105vh) translateX(5px);  opacity: 0; }
+}
+
+/* ===== REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s !important; }
+.reveal-delay-2 { transition-delay: 0.3s !important; }
+.reveal-delay-3 { transition-delay: 0.45s !important; }
+
+/* ===== FLOATING ===== */
+@keyframes floatY {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* ===== SWIM FISH ===== */
+.swim-fish {
+  position: absolute;
+  pointer-events: none;
+  animation: swimAcross linear infinite;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+}
+@keyframes swimAcross {
+  0%   { transform: translateX(-120px) scaleX(-1); }
+  100% { transform: translateX(calc(100vw + 120px)) scaleX(-1); }
+}
+
+/* ===== SECTION SHARED ===== */
+section {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.depth-tag {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 3px;
+  margin-bottom: 36px;
+  text-align: center;
+}
+.section-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(14px, 3vw, 22px);
+  color: var(--yellow);
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4), 0 0 20px rgba(255,214,0,0.3);
+  margin-bottom: 12px;
+}
+.section-sub {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  margin-bottom: 48px;
+  letter-spacing: 2px;
+}
+
+/* ========================
+   SECTION 1 — SURFACE
+   ======================== */
+#surface {
+  background: linear-gradient(
+    180deg,
+    #B84012 0%,
+    #D4601A 8%,
+    #E87B28 16%,
+    #F5A020 24%,
+    #FFD600 36%,
+    #87CEEB 52%,
+    #29B6F6 65%,
+    #0277BD 80%,
+    #01579B 100%
+  );
+  justify-content: center;
+  padding-top: 0;
+}
+
+/* Pixel sun rays */
+.pixel-sun {
+  position: absolute;
+  top: 9%;
+  right: 18%;
+  width: 56px; height: 56px;
+  background: #FFF176;
+  box-shadow:
+    0 0 0 6px #FFE000,
+    0 0 0 10px rgba(255,224,0,0.5),
+    0 0 40px 20px rgba(255,200,0,0.35),
+    -64px 0 0 6px rgba(255,224,0,0.6),
+    64px 0 0 6px rgba(255,224,0,0.6),
+    0 -64px 0 6px rgba(255,224,0,0.6),
+    0 64px 0 6px rgba(255,224,0,0.6);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+@keyframes sunPulse {
+  0%,100% { box-shadow: 0 0 0 6px #FFE000, 0 0 0 10px rgba(255,224,0,0.5), 0 0 40px 20px rgba(255,200,0,0.35), -64px 0 0 6px rgba(255,224,0,0.5), 64px 0 0 6px rgba(255,224,0,0.5), 0 -64px 0 6px rgba(255,224,0,0.5), 0 64px 0 6px rgba(255,224,0,0.5); }
+  50%       { box-shadow: 0 0 0 6px #FFE000, 0 0 0 14px rgba(255,224,0,0.3), 0 0 60px 30px rgba(255,200,0,0.5), -64px 0 0 8px rgba(255,224,0,0.7), 64px 0 0 8px rgba(255,224,0,0.7), 0 -64px 0 8px rgba(255,224,0,0.7), 0 64px 0 8px rgba(255,224,0,0.7); }
+}
+
+/* Water body at bottom of surface */
+.surface-water {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(2,119,189,0.6) 0%, rgba(1,87,155,0.95) 100%);
+}
+
+/* Pixel waves */
+.wave-row {
+  position: absolute;
+  width: 200%;
+  left: -25%;
+  display: flex;
+  gap: 0;
+}
+.wave-row.row1 { bottom: 37%; animation: waveMove 8s linear infinite; }
+.wave-row.row2 { bottom: 34%; animation: waveMove 12s linear infinite reverse; opacity: 0.7; }
+.wave-row.row3 { bottom: 31%; animation: waveMove 10s linear infinite; opacity: 0.5; }
+@keyframes waveMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+.wave-block {
+  width: 40px; height: 12px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50% 50% 0 0;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+/* Hero text */
+.hero-wrap {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  padding: 20px;
+  margin-top: -6vh;
+}
+.hero-pretag {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  animation: fadeUp 1s ease both;
+}
+.hero-name {
+  font-family: var(--font-pixel);
+  font-size: clamp(28px, 7vw, 56px);
+  color: var(--yellow);
+  line-height: 1.3;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.35), 0 0 40px rgba(255,214,0,0.5);
+  animation: fadeUp 1s 0.2s ease both;
+}
+.hero-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(11px, 2.4vw, 17px);
+  color: rgba(255,255,255,0.85);
+  margin-top: 22px;
+  letter-spacing: 3px;
+  animation: fadeUp 1s 0.4s ease both;
+}
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 14px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  animation: fadeUp 1s 0.6s ease both;
+}
+.cta-btn {
+  display: inline-block;
+  margin-top: 44px;
+  padding: 18px 38px;
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  text-decoration: none;
+  cursor: none;
+  box-shadow: 5px 5px 0 #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+  animation: fadeUp 1s 0.8s ease both;
+  letter-spacing: 1px;
+}
+.cta-btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #000; }
+.cta-btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 #000; }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: rgba(255,255,255,0.55);
+  animation: hintBounce 2s ease infinite;
+  white-space: nowrap;
+}
+.scroll-hint span { display: block; margin-top: 8px; font-size: 18px; }
+@keyframes hintBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(7px); }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(24px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ========================
+   SECTION 2 — SHALLOW
+   ======================== */
+#shallow {
+  background: linear-gradient(180deg, #01579B 0%, #0277BD 25%, #0288D1 55%, #039BE5 75%, #0277BD 100%);
+}
+.about-wrap { max-width: 920px; width: 100%; }
+.about-intro {
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.14);
+  padding: 36px 40px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+.about-intro::before {
+  content: '💬';
+  position: absolute;
+  top: -14px; left: 24px;
+  font-size: 22px;
+  background: #0288D1;
+  padding: 0 6px;
+}
+.about-intro p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 14px;
+}
+.about-intro p:last-child { margin-bottom: 0; }
+.about-intro strong { color: var(--yellow); }
+
+.trait-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.trait-card {
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.14);
+  padding: 28px 22px;
+  cursor: none;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.trait-card:nth-child(1) { animation: floatY 4.5s ease-in-out infinite; }
+.trait-card:nth-child(2) { animation: floatY 4.5s 0.6s ease-in-out infinite; }
+.trait-card:nth-child(3) { animation: floatY 4.5s 1.2s ease-in-out infinite; }
+.trait-card:nth-child(4) { animation: floatY 4.5s 1.8s ease-in-out infinite; }
+.trait-card:hover {
+  border-color: var(--yellow);
+  background: rgba(255,214,0,0.1);
+  box-shadow: 0 0 24px rgba(255,214,0,0.25);
+}
+.trait-icon { font-size: 38px; margin-bottom: 14px; display: block; }
+.trait-card h3 {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--yellow);
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+.trait-card p { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.65; }
+
+/* ========================
+   SECTION 2.5 — VOYAGE / CAREER
+   ======================== */
+#voyage {
+  background: linear-gradient(180deg, #039BE5 0%, #0288D1 30%, #0277BD 70%, #01579B 100%);
+}
+.voyage-wrap {
+  max-width: 920px;
+  width: 100%;
+  position: relative;
+  padding: 20px 0;
+}
+/* Central timeline spine */
+.voyage-wrap::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 4px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--yellow) 0px, var(--yellow) 8px,
+    transparent 8px, transparent 16px
+  );
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
+.voyage-item {
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  gap: 0;
+  margin-bottom: 44px;
+  align-items: center;
+  position: relative;
+}
+.voyage-item:last-child { margin-bottom: 0; }
+
+.voyage-dot {
+  width: 60px; height: 60px;
+  background: var(--yellow);
+  border: 4px solid #01579B;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 0 0 4px rgba(255,214,0,0.3), 0 0 24px rgba(255,214,0,0.6);
+  animation: dotPulse 3s ease-in-out infinite;
+}
+.voyage-item:nth-child(2) .voyage-dot { animation-delay: 1s; }
+.voyage-item:nth-child(3) .voyage-dot { animation-delay: 2s; }
+@keyframes dotPulse {
+  0%,100% { box-shadow: 0 0 0 4px rgba(255,214,0,0.3), 0 0 24px rgba(255,214,0,0.6); }
+  50%      { box-shadow: 0 0 0 8px rgba(255,214,0,0.15), 0 0 40px rgba(255,214,0,0.8); }
+}
+
+.voyage-card {
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,214,0,0.3);
+  padding: 24px 26px;
+  backdrop-filter: blur(8px);
+  cursor: none;
+  transition: all 0.3s;
+  position: relative;
+}
+.voyage-card:hover {
+  border-color: var(--yellow);
+  background: rgba(255,214,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 0 24px rgba(255,214,0,0.25);
+}
+/* Arrow pointer to center */
+.voyage-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14px; height: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,214,0,0.3);
+  transform: translateY(-50%) rotate(45deg);
+  transition: all 0.3s;
+}
+.voyage-card.left::after  { right: -9px; border-left: 0; border-bottom: 0; }
+.voyage-card.right::after { left: -9px;  border-right: 0; border-top: 0; }
+.voyage-card.left:hover::after,
+.voyage-card.right:hover::after { border-color: var(--yellow); background: rgba(255,214,0,0.08); }
+
+.voyage-year {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--yellow);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 8px rgba(255,214,0,0.4);
+}
+.voyage-company {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: #FFF;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.voyage-role {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.voyage-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.voyage-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.voyage-tag {
+  background: rgba(255,214,0,0.12);
+  border: 1px solid rgba(255,214,0,0.4);
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  padding: 4px 8px;
+  letter-spacing: 1px;
+}
+
+/* Media positioning */
+.voyage-card.left  { grid-column: 1; text-align: right; }
+.voyage-card.left .voyage-tags { justify-content: flex-end; }
+.voyage-card.right { grid-column: 3; }
+.voyage-item .voyage-dot { grid-column: 2; }
+
+/* Mobile: stack */
+@media (max-width: 768px) {
+  .voyage-wrap::before { left: 30px; }
+  .voyage-item { grid-template-columns: 60px 1fr; gap: 16px; }
+  .voyage-dot { margin: 0; grid-column: 1; }
+  .voyage-card.left,
+  .voyage-card.right {
+    grid-column: 2;
+    text-align: left;
+  }
+  .voyage-card.left .voyage-tags { justify-content: flex-start; }
+  .voyage-card.left::after,
+  .voyage-card.right::after {
+    left: -9px;
+    border-right: 0; border-top: 0;
+    border-left: 2px solid rgba(255,214,0,0.3);
+    border-bottom: 2px solid rgba(255,214,0,0.3);
+  }
+}
+
+/* Sub-chapter timeline (Carrefour 3 positions) */
+.sub-voyage {
+  margin-top: 18px;
+  padding-top: 4px;
+  position: relative;
+}
+.sub-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  position: relative;
+  border-top: 1px dashed rgba(255,214,0,0.2);
+}
+.sub-step:first-child { border-top: none; padding-top: 4px; }
+.sub-step-dot {
+  width: 26px; height: 26px;
+  background: rgba(255,214,0,0.15);
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.sub-step.current .sub-step-dot {
+  background: var(--yellow);
+  box-shadow: 0 0 12px rgba(255,214,0,0.7), 0 0 0 3px rgba(255,214,0,0.2);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+.sub-step-body { flex: 1; min-width: 0; }
+.sub-step-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.sub-step-role {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--yellow);
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+.sub-step-date {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.sub-step.current .sub-step-date {
+  color: var(--cyan);
+  text-shadow: 0 0 6px var(--cyan);
+}
+.sub-step-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+}
+.voyage-card.left .sub-step { text-align: left; }
+.voyage-card.left .sub-step-top { justify-content: flex-start; flex-direction: row-reverse; }
+.voyage-card.left .sub-step-top .sub-step-role { text-align: left; }
+
+.now-badge {
+  display: inline-block;
+  background: var(--cyan);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  padding: 3px 7px;
+  letter-spacing: 1px;
+  margin-right: 6px;
+  box-shadow: 0 0 10px rgba(0,229,255,0.5);
+  animation: dotPulse 2s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .voyage-card.left .sub-step { text-align: left; }
+  .voyage-card.left .sub-step-top { flex-direction: row; justify-content: space-between; }
+}
+
+/* ========================
+   SECTION 3 — MID OCEAN
+   ======================== */
+#midwater {
+  background: linear-gradient(180deg, #0277BD 0%, #01579B 20%, #0D2B4E 55%, #07182E 100%);
+}
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 28px;
+  max-width: 1020px;
+  width: 100%;
+}
+.port-card {
+  background: rgba(0,229,255,0.04);
+  border: 2px solid rgba(0,229,255,0.22);
+  padding: 34px 28px;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.port-card:nth-child(1) { animation: floatY 5s ease-in-out infinite; }
+.port-card:nth-child(2) { animation: floatY 5s 1s ease-in-out infinite; }
+.port-card:nth-child(3) { animation: floatY 5s 2s ease-in-out infinite; }
+/* Scanline glow top */
+.port-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; right: -100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: scanTop 4s ease-in-out infinite;
+}
+.port-card:nth-child(2)::before { animation-delay: 1.3s; }
+.port-card:nth-child(3)::before { animation-delay: 2.6s; }
+@keyframes scanTop {
+  0%,100% { left: -100%; opacity: 0; }
+  40% { left: 100%; opacity: 1; }
+  60% { left: 100%; opacity: 0; }
+}
+.port-card:hover {
+  border-color: var(--yellow);
+  background: rgba(255,214,0,0.07);
+  box-shadow: 0 0 32px rgba(255,214,0,0.2), 0 0 64px rgba(255,214,0,0.08);
+  transform: translateY(-6px) !important;
+}
+.port-icon { font-size: 52px; margin-bottom: 18px; display: block; filter: drop-shadow(0 0 14px rgba(0,229,255,0.5)); }
+.port-title {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: var(--yellow);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.tag {
+  background: rgba(255,214,0,0.1);
+  border: 1px solid rgba(255,214,0,0.35);
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  padding: 5px 9px;
+  letter-spacing: 1px;
+}
+.port-desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 22px; }
+.explore-link {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--cyan);
+  background: none;
+  border: none;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  padding: 0;
+}
+.explore-link::after { content: '→'; transition: transform 0.2s; }
+.port-card:hover .explore-link { color: var(--yellow); gap: 14px; }
+.port-card:hover .explore-link::after { transform: translateX(2px); }
+
+/* ========================
+   SECTION 4 — DEEP
+   ======================== */
+#deep {
+  background: linear-gradient(180deg, #07182E 0%, #050E1A 50%, #040B15 100%);
+}
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 22px;
+  max-width: 920px;
+  width: 100%;
+}
+.skill-item {
+  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(255,255,255,0.08);
+  padding: 30px 16px 22px;
+  text-align: center;
+  cursor: none;
+  transition: all 0.3s;
+  position: relative;
+}
+.skill-item:nth-child(1) { animation: floatY 6s ease-in-out infinite; }
+.skill-item:nth-child(2) { animation: floatY 6s 0.9s ease-in-out infinite; }
+.skill-item:nth-child(3) { animation: floatY 6s 1.8s ease-in-out infinite; }
+.skill-item:nth-child(4) { animation: floatY 6s 2.7s ease-in-out infinite; }
+.skill-item:nth-child(5) { animation: floatY 6s 3.6s ease-in-out infinite; }
+.skill-item:nth-child(6) { animation: floatY 6s 4.5s ease-in-out infinite; }
+.skill-item:hover {
+  border-color: var(--cyan);
+  background: rgba(0,229,255,0.07);
+  box-shadow: 0 0 22px rgba(0,229,255,0.25), 0 0 50px rgba(0,229,255,0.1), inset 0 0 16px rgba(0,229,255,0.04);
+}
+.skill-icon { font-size: 42px; margin-bottom: 14px; display: block; transition: filter 0.3s; }
+.skill-item:hover .skill-icon { filter: drop-shadow(0 0 14px var(--cyan)); }
+.skill-name {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.pip-row { display: flex; gap: 4px; justify-content: center; }
+.pip {
+  width: 9px; height: 9px;
+  background: rgba(255,255,255,0.15);
+  transition: all 0.3s;
+}
+.pip.on { background: var(--cyan); box-shadow: 0 0 7px var(--cyan); }
+.skill-item:hover .pip.on { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+
+/* Credentials row (education + language) */
+.credentials-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 920px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.cred-card {
+  background: rgba(0,229,255,0.04);
+  border: 2px solid rgba(0,229,255,0.2);
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.3s;
+  cursor: none;
+}
+.cred-card:hover {
+  border-color: var(--yellow);
+  background: rgba(255,214,0,0.06);
+  box-shadow: 0 0 22px rgba(255,214,0,0.2);
+  transform: translateY(-3px);
+}
+.cred-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(0,229,255,0.4));
+  transition: filter 0.3s;
+}
+.cred-card:hover .cred-icon { filter: drop-shadow(0 0 14px rgba(255,214,0,0.6)); }
+.cred-body { flex: 1; min-width: 0; }
+.cred-label {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.cred-title {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--yellow);
+  line-height: 1.6;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+.cred-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+.cred-score {
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  padding: 6px 10px;
+  margin-left: 6px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 12px rgba(255,214,0,0.4);
+}
+
+/* ========================
+   SECTION 5 — FLOOR
+   ======================== */
+#floor {
+  background: linear-gradient(180deg, #040B15 0%, #030810 60%, #020508 100%);
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 22px;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 0 56px;
+}
+.badge-item {
+  text-align: center;
+  padding: 34px 18px;
+  background: rgba(255,214,0,0.03);
+  border: 2px solid rgba(255,214,0,0.16);
+  position: relative;
+  overflow: hidden;
+  animation: badgePulse 4s ease-in-out infinite;
+  cursor: none;
+  transition: all 0.3s;
+}
+.badge-item:nth-child(2) { animation-delay: 1s; }
+.badge-item:nth-child(3) { animation-delay: 2s; }
+.badge-item:nth-child(4) { animation-delay: 3s; }
+.badge-item:hover {
+  border-color: var(--yellow);
+  background: rgba(255,214,0,0.08);
+  box-shadow: 0 0 30px rgba(255,214,0,0.3);
+  transform: scale(1.04);
+}
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 8px rgba(255,214,0,0.1); }
+  50%      { box-shadow: 0 0 22px rgba(255,214,0,0.28), 0 0 44px rgba(255,214,0,0.1); }
+}
+.badge-icon { font-size: 52px; margin-bottom: 18px; display: block; filter: drop-shadow(0 0 16px rgba(255,214,0,0.5)); }
+.badge-title {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--yellow);
+  line-height: 1.7;
+}
+
+/* CONTACT BOX */
+.contact-box {
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+  padding: 44px 36px;
+  background: rgba(255,214,0,0.04);
+  border: 2px solid rgba(255,214,0,0.25);
+  position: relative;
+  box-shadow: 0 0 40px rgba(255,214,0,0.08);
+}
+.contact-box::before {
+  content: '⚓ HARBOUR';
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: #030810;
+  padding: 0 16px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--yellow);
+  white-space: nowrap;
+}
+.contact-box .section-title { margin-bottom: 0; }
+.contact-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  margin: 18px 0 30px;
+  line-height: 1.75;
+}
+.contact-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.c-btn {
+  display: inline-block;
+  padding: 16px 28px;
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  text-decoration: none;
+  cursor: none;
+  box-shadow: 4px 4px 0 rgba(255,214,0,0.35);
+  transition: transform 0.1s, box-shadow 0.1s;
+  letter-spacing: 1px;
+}
+.c-btn:hover  { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(255,214,0,0.35); }
+.c-btn:active { transform: translate(2px,2px);  box-shadow: 2px 2px 0 rgba(255,214,0,0.35); }
+.c-btn.outline {
+  background: transparent;
+  color: var(--yellow);
+  border: 2px solid var(--yellow);
+  box-shadow: 4px 4px 0 rgba(255,214,0,0.2);
+}
+.c-btn.outline:hover { background: rgba(255,214,0,0.1); }
+
+.footer-text {
+  margin-top: 64px;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* ========================
+   PORTRAIT AVATAR (港口頭像)
+   ======================== */
+.portrait-wrap {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 24px;
+  position: relative;
+  animation: floatY 4.5s ease-in-out infinite;
+}
+/* Pixel yellow frame with stepped corners */
+.portrait-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--yellow);
+  padding: 6px;
+  box-shadow:
+    /* Pixel corners */
+    -6px -6px 0 0 rgba(255,214,0,0.3),
+     6px -6px 0 0 rgba(255,214,0,0.3),
+    -6px  6px 0 0 rgba(255,214,0,0.3),
+     6px  6px 0 0 rgba(255,214,0,0.3),
+    /* Glow */
+    0 0 30px rgba(255,214,0,0.4),
+    0 0 60px rgba(255,214,0,0.15);
+}
+.portrait-frame::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 2px dashed rgba(255,214,0,0.4);
+  pointer-events: none;
+  animation: frameRotate 40s linear infinite;
+}
+@keyframes frameRotate {
+  0%   { transform: rotate(0deg); opacity: 0.4; }
+  50%  { opacity: 0.15; }
+  100% { transform: rotate(360deg); opacity: 0.4; }
+}
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: auto;
+  filter: contrast(1.05) saturate(0.95);
+  transition: filter 0.4s;
+}
+.portrait-wrap:hover .portrait-img {
+  filter: contrast(1.1) saturate(1.1);
+}
+/* Tiny bubbles around portrait */
+.portrait-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(255,255,255,0.1));
+  border: 1px solid rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+.portrait-bubble.b1 { width:10px; height:10px; top: -12px; right: -8px; animation: floatY 2.5s ease-in-out infinite; }
+.portrait-bubble.b2 { width:6px;  height:6px;  top:  20px; right: -20px; animation: floatY 3s 0.5s ease-in-out infinite; }
+.portrait-bubble.b3 { width:8px;  height:8px;  bottom: 10px; left: -16px; animation: floatY 2.8s 1s ease-in-out infinite; }
+.portrait-bubble.b4 { width:4px;  height:4px;  top: 60px; left: -20px; animation: floatY 3.5s 0.3s ease-in-out infinite; }
+
+/* Name plate under portrait */
+.portrait-plate {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,214,0,0.4);
+  padding: 8px 14px;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--yellow);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255,214,0,0.4);
+}
+.portrait-plate::before { content: '▶ '; }
+.portrait-plate::after  { content: ' ◀'; }
+
+/* ========================
+   MODAL
+   ======================== */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-bg.open { opacity: 1; pointer-events: all; }
+.modal-card {
+  background: linear-gradient(160deg, #0C1E38, #07182E);
+  border: 2px solid var(--yellow);
+  max-width: 620px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 50px rgba(255,214,0,0.3), 6px 6px 0 rgba(255,214,0,0.15);
+  transform: scale(0.88);
+  transition: transform 0.3s;
+}
+.modal-bg.open .modal-card { transform: scale(1); }
+.modal-head {
+  background: var(--yellow);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.modal-head-title {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: #000;
+  line-height: 1.4;
+}
+.modal-close-btn {
+  width: 36px; height: 36px;
+  background: #000;
+  border: none;
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  cursor: none;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.modal-close-btn:hover { background: #1a1a1a; }
+.modal-body { padding: 30px 28px; }
+.m-section { margin-bottom: 26px; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.m-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.m-section-label {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.m-section-body {
+  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.8;
+}
+.m-section-body ul { padding-left: 20px; }
+.m-section-body li { margin-bottom: 8px; }
+.impact-pill {
+  display: inline-block;
+  background: rgba(255,214,0,0.12);
+  border: 1px solid rgba(255,214,0,0.45);
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: 7px 12px;
+  margin: 4px;
+  letter-spacing: 1px;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .depth-meter { display: none; }
+  .hero-name { font-size: 26px; }
+  .hero-title { font-size: 11px; }
+  .about-intro { padding: 24px 20px; }
+  .modal-body { padding: 22px 18px; }
+  .contact-box { padding: 36px 22px; }
+  section { padding: 80px 16px 60px; }
+}
+@media (max-width: 480px) {
+  .hero-name { font-size: 20px; }
+  .hero-title { font-size: 9px; }
+  .cta-btn { font-size: 9px; padding: 14px 24px; }
+  .badge-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Bubbles -->
+<div id="bubbles-wrap"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">RITA.WU</div>
+  <ul class="nav-links">
+    <li><a href="#surface">海面</a></li>
+    <li><a href="#shallow">關於我</a></li>
+    <li><a href="#voyage">職涯</a></li>
+    <li><a href="#midwater">作品集</a></li>
+    <li><a href="#deep">技能</a></li>
+    <li><a href="#floor">聯絡</a></li>
+  </ul>
+</nav>
+
+<!-- DEPTH METER -->
+<div class="depth-meter" id="depthMeter">
+  <span class="depth-value" id="depthVal">0m</span>
+  <div class="depth-track">
+    <div class="depth-fill" id="depthFill"></div>
+    <div class="depth-pip" id="depthPip"></div>
+  </div>
+  <span class="depth-label">DEPTH</span>
+</div>
+
+<!-- ========== SECTION 1 — SURFACE ========== -->
+<section id="surface">
+  <div class="pixel-sun"></div>
+
+  <!-- Clouds -->
+  <div style="position:absolute;top:10%;left:-120px;width:90px;height:22px;background:rgba(255,255,255,0.55);border-radius:11px;animation:cloudDrift 28s linear infinite">
+    <div style="position:absolute;width:46px;height:28px;background:rgba(255,255,255,0.55);border-radius:50%;top:-14px;left:14px"></div>
+    <div style="position:absolute;width:32px;height:22px;background:rgba(255,255,255,0.5);border-radius:50%;top:-10px;left:48px"></div>
+  </div>
+  <div style="position:absolute;top:19%;left:-80px;width:64px;height:16px;background:rgba(255,255,255,0.4);border-radius:8px;animation:cloudDrift 40s linear infinite;animation-delay:-18s">
+    <div style="position:absolute;width:36px;height:22px;background:rgba(255,255,255,0.4);border-radius:50%;top:-12px;left:10px"></div>
+  </div>
+  <style>
+    @keyframes cloudDrift {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(100vw + 200px)); }
+    }
+  </style>
+
+  <!-- Waves -->
+  <div class="wave-row row1">
+    <div class="wave-block" style="opacity:0.9"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+  </div>
+  <div class="wave-row row2">
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+  </div>
+  <div class="wave-row row3">
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+    <div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div><div class="wave-block"></div>
+  </div>
+
+  <div class="surface-water">
+    <!-- fish near surface -->
+    <div class="swim-fish" style="top:20%;font-size:18px;animation-duration:14s;animation-delay:0s">🐟</div>
+    <div class="swim-fish" style="top:50%;font-size:14px;animation-duration:20s;animation-delay:-7s">🐠</div>
+    <div class="swim-fish" style="top:75%;font-size:20px;animation-duration:18s;animation-delay:-3s">🐡</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="hero-pretag">// DIVE INTO THE DIGITAL OCEAN //</div>
+    <div class="hero-name">RITA WU｜吳雙</div>
+    <div class="hero-title">MOBILE & SOCIAL MEDIA MANAGER</div>
+    <div class="hero-sub">媒體出身的行銷人｜從 TVBS 節目製作、NOWnews 網路媒體到家樂福社群經理<br>橫跨電視 × 網路 × 零售品牌・311+ 門市的完整歷練</div>
+    <a href="#shallow" class="cta-btn">▶ 開始探索旅程</a>
+  </div>
+
+  <div class="scroll-hint">
+    SCROLL TO DIVE
+    <span>▼</span>
+  </div>
+</section>
+
+<!-- ========== SECTION 2 — SHALLOW ========== -->
+<section id="shallow">
+  <!-- Decorative floating emojis -->
+  <div class="swim-fish" style="top:15%;font-size:22px;animation-duration:22s;animation-delay:-4s">🐟</div>
+  <div class="swim-fish" style="top:65%;font-size:16px;animation-duration:30s;animation-delay:-14s">🦑</div>
+  <div style="position:absolute;bottom:4%;left:4%;font-size:32px;opacity:0.15;animation:floatY 5s ease-in-out infinite">🪸</div>
+  <div style="position:absolute;bottom:4%;right:6%;font-size:32px;opacity:0.15;animation:floatY 5s 1.5s ease-in-out infinite">🪸</div>
+  <div style="position:absolute;bottom:1%;left:22%;font-size:24px;opacity:0.12;animation:floatY 4s 0.7s ease-in-out infinite">🌿</div>
+  <div style="position:absolute;bottom:1%;right:28%;font-size:24px;opacity:0.12;animation:floatY 4s 2s ease-in-out infinite">🌿</div>
+
+  <div class="depth-tag reveal">▼ DEPTH 10m — SHALLOW WATERS</div>
+  <h2 class="section-title reveal">關於這位潛水員</h2>
+
+  <div class="about-wrap">
+    <div class="about-intro reveal reveal-delay-1">
+      <p>👋 我是 Rita Wu（吳雙），目前在家樂福擔任 <strong>Mobile & Social Media Manager</strong>，主導品牌的數位行銷策略與社群經營。</p>
+      <p>這個角色，是我在家樂福 5 年內的第三次晉升。從 Advertising Specialist 的廣告企劃、Survey Specialist 的市場洞察，到現在統籌 FB / IG / LINE OA / 直播 的社群經理——每一次轉換都讓我更理解「品牌如何與消費者對話」。</p>
+      <p>回頭看這段旅程：出發點是 TVBS 電視台的節目製作，之後走進 NOWnews 今日傳媒的網路媒體，最後落腳家樂福的零售品牌端。<strong>電視內容 × 網路媒體 × 零售行銷</strong>——這個罕見的組合，讓我擁有從「製作一支影片」到「經營一個品牌」的完整視角。</p>
+    </div>
+    <div class="trait-grid">
+      <div class="trait-card reveal reveal-delay-1">
+        <span class="trait-icon">🐙</span>
+        <h3>高適應力</h3>
+        <p>像章魚能適應任何環境，面對市場變化快速調整策略，從疫情溝通到 TikTok 崛起，我總能找到新的生存方式。</p>
+      </div>
+      <div class="trait-card reveal reveal-delay-2">
+        <span class="trait-icon">🦈</span>
+        <h3>強執行力</h3>
+        <p>像鯊魚一樣永不停歇，從策略規劃到落地執行，追求每個 campaign 都能精準命中目標。</p>
+      </div>
+      <div class="trait-card reveal reveal-delay-3">
+        <span class="trait-icon">🐬</span>
+        <h3>學習探索</h3>
+        <p>對未知的熱情就像海豚對海浪的好奇，持續追蹤趨勢、學習新工具，把最新的知識轉化為行動。</p>
+      </div>
+      <div class="trait-card reveal">
+        <span class="trait-icon">🪸</span>
+        <h3>彈性與韌性</h3>
+        <p>像珊瑚礁能在複雜環境中生長，面對高壓與挑戰，依然能保持創意，建立長遠的品牌生態系。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 2.5 — VOYAGE ========== -->
+<section id="voyage">
+  <div style="position:absolute;top:10%;left:4%;font-size:28px;opacity:0.12;animation:floatY 6s ease-in-out infinite">🧭</div>
+  <div style="position:absolute;bottom:8%;right:5%;font-size:26px;opacity:0.12;animation:floatY 5s 1s ease-in-out infinite">⚓</div>
+  <div class="swim-fish" style="top:22%;font-size:20px;animation-duration:26s;animation-delay:-10s">🐠</div>
+  <div class="swim-fish" style="top:70%;font-size:24px;animation-duration:32s;animation-delay:-5s">🐟</div>
+
+  <div class="depth-tag reveal">▼ DEPTH 30m — CAREER VOYAGE</div>
+  <h2 class="section-title reveal">職涯航海日誌</h2>
+  <p class="section-sub reveal">FROM NOW BACK TO THE BEGINNING</p>
+
+  <div class="voyage-wrap">
+    <!-- 1. Carrefour — CURRENT & CORE -->
+    <div class="voyage-item reveal reveal-delay-1">
+      <div class="voyage-card left">
+        <div class="voyage-year"><span class="now-badge">NOW</span>// CHAPTER 01 · 2021—CURRENT · 5 YEARS</div>
+        <div class="voyage-company">家樂福 Carrefour ⭐</div>
+        <div class="voyage-role">零售品牌・5 年內三次晉升</div>
+        <div class="voyage-desc">加入家樂福 5 年，完成三次角色轉換與能力升級。從廣告企劃到市場洞察、再到現在的社群經理，每一段經歷都為下一段打下基礎。</div>
+
+        <div class="sub-voyage">
+          <!-- Current: Manager -->
+          <div class="sub-step current">
+            <div class="sub-step-dot">📱</div>
+            <div class="sub-step-body">
+              <div class="sub-step-top">
+                <div class="sub-step-role">MOBILE &amp; SOCIAL MEDIA MANAGER</div>
+                <div class="sub-step-date">2022/8 — NOW</div>
+              </div>
+              <div class="sub-step-desc">主導數位行銷策略、FB/IG 社群經營、LINE OA、Meta 廣告、直播行銷與 GA 成效分析</div>
+            </div>
+          </div>
+          <!-- Survey Specialist -->
+          <div class="sub-step">
+            <div class="sub-step-dot">📊</div>
+            <div class="sub-step-body">
+              <div class="sub-step-top">
+                <div class="sub-step-role">SURVEY SPECIALIST</div>
+                <div class="sub-step-date">2021/11 — 2022/7</div>
+              </div>
+              <div class="sub-step-desc">與 DATA TEAM 協作建置 311+ 門市 NPS 自動化系統、品牌形象與競品分析</div>
+            </div>
+          </div>
+          <!-- Advertising Specialist -->
+          <div class="sub-step">
+            <div class="sub-step-dot">🎯</div>
+            <div class="sub-step-body">
+              <div class="sub-step-top">
+                <div class="sub-step-role">ADVERTISING SPECIALIST</div>
+                <div class="sub-step-date">2021/5 — 2022/7</div>
+              </div>
+              <div class="sub-step-desc">操刀 2021 中元節 TVC、促銷影片、店內行銷與疫情溝通策略</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="voyage-tags" style="margin-top:18px">
+          <span class="voyage-tag">社群經營</span>
+          <span class="voyage-tag">META ADS</span>
+          <span class="voyage-tag">LINE OA</span>
+          <span class="voyage-tag">TVC 操刀</span>
+          <span class="voyage-tag">NPS 系統</span>
+          <span class="voyage-tag">311+ 門市</span>
+        </div>
+      </div>
+      <div class="voyage-dot">🛒</div>
+    </div>
+
+    <!-- 2. NOWnews -->
+    <div class="voyage-item reveal reveal-delay-2">
+      <div class="voyage-dot">💻</div>
+      <div class="voyage-card right">
+        <div class="voyage-year">// CHAPTER 02 · 2019—2020</div>
+        <div class="voyage-company">NOWnews 今日傳媒</div>
+        <div class="voyage-role">網路媒體・數位節目企劃</div>
+        <div class="voyage-desc">從傳統電視潛入網路媒體海域，擔任傳播媒體企劃人員。負責網路節目的規劃、拍攝與製作，學會如何在數位平台上讓內容被看見。這段經驗讓我具備「電視規格 × 網路思維」的雙軌內容製作能力。</div>
+        <div class="voyage-tags">
+          <span class="voyage-tag">網路節目</span>
+          <span class="voyage-tag">數位內容</span>
+          <span class="voyage-tag">企劃拍攝</span>
+          <span class="voyage-tag">媒體轉型</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. TVBS -->
+    <div class="voyage-item reveal reveal-delay-3">
+      <div class="voyage-card left">
+        <div class="voyage-year">// CHAPTER 03 · 2016—2019 · ORIGIN</div>
+        <div class="voyage-company">TVBS 電視台</div>
+        <div class="voyage-role">傳統電視媒體・內容製作與媒體技術基礎</div>
+        <div class="voyage-desc">一切的起點。從影音剪輯工讀生一路做到執行製作，管理 5-8 人團隊。曾於新媒體部門負責網路直播操作、工讀生影音品質控管，也曾於節目部少康戰情室製作節目。打下扎實的影音製作、現場執行與團隊協作基礎。</div>
+        <div class="voyage-tags">
+          <span class="voyage-tag">影音剪輯</span>
+          <span class="voyage-tag">節目製作</span>
+          <span class="voyage-tag">網路直播</span>
+          <span class="voyage-tag">團隊管理</span>
+        </div>
+      </div>
+      <div class="voyage-dot">📺</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 3 — MID OCEAN ========== -->
+<section id="midwater">
+  <div style="position:absolute;top:8%;left:3%;font-size:36px;opacity:0.12;animation:floatY 8s ease-in-out infinite">🐋</div>
+  <div style="position:absolute;top:12%;right:4%;font-size:28px;opacity:0.12;animation:floatY 6s 2s ease-in-out infinite">🦑</div>
+  <div style="position:absolute;bottom:6%;left:5%;font-size:24px;opacity:0.1;animation:floatY 5s 1s ease-in-out infinite">🪸</div>
+  <div class="swim-fish" style="top:28%;font-size:26px;animation-duration:30s;animation-delay:-8s">🐳</div>
+
+  <div class="depth-tag reveal">▼ DEPTH 50m — MID WATERS</div>
+  <h2 class="section-title reveal">探索作品海域</h2>
+  <p class="section-sub reveal">點擊任一區塊，探索更多細節...</p>
+
+  <div class="port-grid">
+    <div class="port-card reveal reveal-delay-1" onclick="openModal('omnichannel')">
+      <div class="port-icon">🌊</div>
+      <div class="port-title">OMNICHANNEL<br>GROWTH</div>
+      <div class="tag-row">
+        <span class="tag">FB/IG</span><span class="tag">LINE</span>
+        <span class="tag">TIKTOK</span><span class="tag">YT</span>
+        <span class="tag">META ADS</span>
+      </div>
+      <div class="port-desc">全渠道社群策略與廣告操作，打造跨平台一致的品牌聲音，讓每個接觸點都有溫度。</div>
+      <button class="explore-link">EXPLORE</button>
+    </div>
+
+    <div class="port-card reveal reveal-delay-2" onclick="openModal('data')">
+      <div class="port-icon">📊</div>
+      <div class="port-title">DATA-DRIVEN<br>STRATEGY</div>
+      <div class="tag-row">
+        <span class="tag">NPS</span><span class="tag">CX</span>
+        <span class="tag">INSIGHT</span><span class="tag">311+ STORES</span>
+      </div>
+      <div class="port-desc">建立數據驅動的決策系統，從洞察到策略閉環執行，讓每個行銷決策都有數字支撐。</div>
+      <button class="explore-link">EXPLORE</button>
+    </div>
+
+    <div class="port-card reveal reveal-delay-3" onclick="openModal('campaign')">
+      <div class="port-icon">🎯</div>
+      <div class="port-title">CAMPAIGN<br>IMPACT</div>
+      <div class="tag-row">
+        <span class="tag">TVC</span><span class="tag">BRAND</span>
+        <span class="tag">PROMO</span><span class="tag">IN-STORE</span>
+      </div>
+      <div class="port-desc">從中元節 TVC 到全通路促銷活動，打造有溫度的品牌聲浪，線上線下無縫整合。</div>
+      <button class="explore-link">EXPLORE</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 4 — DEEP ========== -->
+<section id="deep">
+  <div style="position:absolute;top:5%;right:5%;font-size:32px;opacity:0.1;animation:floatY 7s ease-in-out infinite">🦑</div>
+  <div style="position:absolute;bottom:5%;left:7%;font-size:28px;opacity:0.1;animation:floatY 5s 2s ease-in-out infinite">🐙</div>
+  <div style="position:absolute;top:40%;left:2%;font-size:20px;opacity:0.08;animation:floatY 9s 1s ease-in-out infinite">🐟</div>
+
+  <div class="depth-tag reveal">▼ DEPTH 100m — DEEP ZONE</div>
+  <h2 class="section-title reveal">潛水裝備庫</h2>
+  <p class="section-sub reveal">HOVER TO ACTIVATE GEAR</p>
+
+  <!-- Education & Language Credentials -->
+  <div class="credentials-row">
+    <div class="cred-card reveal reveal-delay-1">
+      <span class="cred-icon">🎓</span>
+      <div class="cred-body">
+        <div class="cred-label">EDUCATION</div>
+        <div class="cred-title">世新大學 SHIH HSIN UNIV.</div>
+        <div class="cred-sub">新聞學系｜Bachelor of Journalism</div>
+      </div>
+    </div>
+    <div class="cred-card reveal reveal-delay-2">
+      <span class="cred-icon">🌐</span>
+      <div class="cred-body">
+        <div class="cred-label">LANGUAGE</div>
+        <div class="cred-title">
+          TOEIC <span class="cred-score">850</span>
+        </div>
+        <div class="cred-sub">英文中等 · 法文略懂</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skill-grid">
+    <div class="skill-item reveal reveal-delay-1">
+      <span class="skill-icon">📱</span>
+      <div class="skill-name">SOCIAL MEDIA<br>STRATEGY</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div>
+      </div>
+    </div>
+    <div class="skill-item reveal reveal-delay-2">
+      <span class="skill-icon">💰</span>
+      <div class="skill-name">META ADS<br>MANAGEMENT</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div>
+      </div>
+    </div>
+    <div class="skill-item reveal reveal-delay-3">
+      <span class="skill-icon">📈</span>
+      <div class="skill-name">DATA<br>ANALYTICS</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div>
+      </div>
+    </div>
+    <div class="skill-item reveal">
+      <span class="skill-icon">🎬</span>
+      <div class="skill-name">VIDEO &amp;<br>LIVE MARKETING</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div><div class="pip"></div>
+      </div>
+    </div>
+    <div class="skill-item reveal reveal-delay-1">
+      <span class="skill-icon">🗺️</span>
+      <div class="skill-name">CAMPAIGN<br>PLANNING</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div>
+      </div>
+    </div>
+    <div class="skill-item reveal reveal-delay-2">
+      <span class="skill-icon">💛</span>
+      <div class="skill-name">CX &amp; NPS<br>SYSTEM</div>
+      <div class="pip-row">
+        <div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 5 — FLOOR ========== -->
+<section id="floor" style="justify-content:flex-start;padding-top:120px">
+  <div class="depth-tag reveal">▼ DEPTH 200m — OCEAN FLOOR</div>
+  <h2 class="section-title reveal">深海成就解鎖</h2>
+  <p class="section-sub reveal">ACHIEVEMENTS UNLOCKED</p>
+
+  <div class="badge-grid">
+    <div class="badge-item reveal reveal-delay-1">
+      <span class="badge-icon">🌊</span>
+      <div class="badge-title">OMNICHANNEL<br>STRATEGIST</div>
+    </div>
+    <div class="badge-item reveal reveal-delay-2">
+      <span class="badge-icon">📊</span>
+      <div class="badge-title">DATA-DRIVEN<br>MARKETER</div>
+    </div>
+    <div class="badge-item reveal reveal-delay-3">
+      <span class="badge-icon">🎯</span>
+      <div class="badge-title">CAMPAIGN<br>COMMANDER</div>
+    </div>
+    <div class="badge-item reveal">
+      <span class="badge-icon">❤️</span>
+      <div class="badge-title">CUSTOMER EXPERIENCE<br>BUILDER</div>
+    </div>
+  </div>
+
+  <div class="contact-box reveal">
+    <div class="portrait-wrap">
+      <div class="portrait-bubble b1"></div>
+      <div class="portrait-bubble b2"></div>
+      <div class="portrait-bubble b3"></div>
+      <div class="portrait-bubble b4"></div>
+      <div class="portrait-frame">
+        <img src="assets/rita.jpg" alt="Rita Wu" class="portrait-img">
+      </div>
+    </div>
+    <div class="portrait-plate">DIVER · RITA WU</div>
+    <h2 class="section-title" style="font-size:16px">回到港口</h2>
+    <p class="contact-sub">探索結束了，但合作才剛開始。<br>如果你也相信行銷是一場值得深潛的旅程，我們聊聊吧。</p>
+    <div class="contact-btns">
+      <a href="mailto:a0929621689@gmail.com" class="c-btn">📧 寄信給我</a>
+      <a href="https://www.linkedin.com/in/rita-wu-580241242" target="_blank" class="c-btn outline">💼 LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="footer-text">© 2025 RITA WU · MOBILE &amp; SOCIAL MEDIA MANAGER · CRAFTED WITH 💛 AND DATA</div>
+</section>
+
+<!-- ========== MODAL ========== -->
+<div class="modal-bg" id="modalBg" onclick="handleBgClick(event)">
+  <div class="modal-card" id="modalCard">
+    <div class="modal-head">
+      <div class="modal-head-title" id="modalHeadTitle">—</div>
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBodyContent"></div>
+  </div>
+</div>
+
+<script>
+/* ===== CURSOR ===== */
+const cursor     = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+});
+(function animRing(){
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px)`;
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,[onclick]').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursorRing.style.width='44px'; cursorRing.style.height='44px'; });
+  el.addEventListener('mouseleave', () => { cursorRing.style.width='28px'; cursorRing.style.height='28px'; });
+});
+
+/* ===== NAV SCROLL ===== */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 60);
+  updateDepth();
+  checkReveal();
+});
+
+/* ===== DEPTH METER ===== */
+function updateDepth() {
+  const progress = Math.min(scrollY / (document.body.scrollHeight - innerHeight), 1);
+  const depth = Math.round(progress * 200);
+  document.getElementById('depthVal').textContent = depth + 'm';
+  document.getElementById('depthFill').style.height = (progress * 100) + '%';
+  document.getElementById('depthPip').style.top = (progress * 166) + 'px';
+}
+
+/* ===== REVEAL ===== */
+function checkReveal() {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight * 0.88) el.classList.add('visible');
+  });
+}
+checkReveal();
+window.addEventListener('load', checkReveal);
+
+/* ===== BUBBLES ===== */
+const bWrap = document.getElementById('bubbles-wrap');
+function spawnBubble() {
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  const size = Math.random() * 18 + 5;
+  b.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    animation-duration:${Math.random()*9+7}s;
+    animation-delay:${Math.random()*3}s;
+  `;
+  bWrap.appendChild(b);
+  setTimeout(() => b.remove(), 16000);
+}
+for (let i=0;i<18;i++) setTimeout(spawnBubble, i*250);
+setInterval(spawnBubble, 900);
+
+/* ===== BIO PARTICLES (floor) ===== */
+const floorEl = document.getElementById('floor');
+const bioColors = ['#FFD600','#00E5FF','#00FF9F','#FF6BB3','#A78BFA'];
+for (let i=0;i<24;i++) {
+  const p = document.createElement('div');
+  const c = bioColors[i % bioColors.length];
+  const s = Math.random()*6+2;
+  p.style.cssText = `
+    position:absolute;
+    width:${s}px; height:${s}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    background:${c};
+    border-radius:50%;
+    box-shadow:0 0 ${s*3}px ${c};
+    pointer-events:none;
+    animation:badgePulse ${Math.random()*3+2}s ${Math.random()*4}s ease-in-out infinite;
+  `;
+  floorEl.appendChild(p);
+}
+
+/* ===== MODAL DATA ===== */
+const MODAL_DATA = {
+  omnichannel: {
+    title: '🌊 OMNICHANNEL GROWTH',
+    sections: [
+      { label: '// WHAT I DID @ CARREFOUR',
+        body: `<ul>
+          <li><strong>Digital Marketing Strategy：</strong>設計並執行全面數位行銷策略，整合多個線上渠道達成商業目標</li>
+          <li><strong>Social Media Marketing：</strong>策劃 FB / IG 社群經營策略，強化品牌聲量與互動</li>
+          <li><strong>LINE Official Account：</strong>管理 LINE OA 操作、內容規劃與受眾互動</li>
+          <li><strong>Meta Advertising：</strong>操作 Facebook / Instagram 廣告投放與優化</li>
+          <li><strong>Online Video Marketing：</strong>策劃並執行影音內容，驅動流量與轉換</li>
+          <li><strong>Live Video Streaming：</strong>規劃並執行直播內容，即時與受眾互動</li>
+        </ul>` },
+      { label: '// MY ROLE',
+        body: `目前職位 <strong>Mobile & Social Media Manager</strong>（2022/8-至今），主導家樂福的數位行銷策略與社群經營，橫跨 FB / IG / LINE OA / 直播等多元渠道，並以 Google Analytics 追蹤成效、做出數據驅動的策略決策。` },
+      { label: '// IMPACT',
+        body: `<div>
+          <span class="impact-pill">📱 Manager 級職銜</span>
+          <span class="impact-pill">🎯 全渠道整合</span>
+          <span class="impact-pill">📊 GA 數據追蹤</span>
+          <span class="impact-pill">💬 LINE OA 經營</span>
+          <span class="impact-pill">🔴 直播行銷</span>
+        </div>` }
+    ]
+  },
+  data: {
+    title: '📊 DATA-DRIVEN STRATEGY',
+    sections: [
+      { label: '// WHAT I DID @ CARREFOUR',
+        body: `<ul>
+          <li><strong>NPS Real-Time Survey System：</strong>成功上線並管理自動化 NPS 即時調查系統，提供 311+ 門市的顧客旅程即時分析</li>
+          <li><strong>Brand Image & Competition Benchmarking：</strong>主導品牌形象與競品基準調查，為零售業營運提供關鍵洞察</li>
+          <li><strong>Monthly Barometer Surveys：</strong>每月執行市場脈動調查並分析，提供可落地的策略建議</li>
+          <li><strong>Market Research & Analysis：</strong>負責全台 311+ 家樂福門市的市場研究與分析,辨識關鍵趨勢並提供數據洞察</li>
+        </ul>` },
+      { label: '// MY ROLE',
+        body: `擔任 <strong>Survey Specialist</strong>（2021/11-2022/7）期間，與 DATA TEAM 協作建置 NPS 自動化流程。從問卷設計、資料串接、自動化報表到行動建議的完整閉環，讓數據真正服務品牌決策。` },
+      { label: '// IMPACT',
+        body: `<div>
+          <span class="impact-pill">🏪 311+ 門市覆蓋</span>
+          <span class="impact-pill">⚡ 即時數據回饋</span>
+          <span class="impact-pill">🤖 自動化系統</span>
+          <span class="impact-pill">📋 月度洞察報告</span>
+          <span class="impact-pill">🎯 品牌競品分析</span>
+        </div>` }
+    ]
+  },
+  campaign: {
+    title: '🎯 CAMPAIGN IMPACT',
+    sections: [
+      { label: '// WHAT I DID @ CARREFOUR',
+        body: `<ul>
+          <li><strong>Strategic TVC Planning：</strong>操刀 2021 中元節 TVC「中元盛典」，強化節慶期間品牌能見度與共鳴</li>
+          <li><strong>Promotional Video Management：</strong>統籌促銷影片製作（含檔期促銷），提升顧客興趣與來客量</li>
+          <li><strong>Market Penetration Campaigns：</strong>企劃並執行品牌形象廣告，拓展市場版圖、觸及新客群</li>
+          <li><strong>Innovative In-Store Promotions：</strong>執行動態店內促銷策略，顯著提升顧客回訪率與品牌忠誠度</li>
+          <li><strong>Pandemic Communication：</strong>疫情期間強化顧客溝通策略，即時傳遞相關訊息維持客戶互動</li>
+        </ul>` },
+      { label: '// MY ROLE',
+        body: `擔任 <strong>Advertising Specialist</strong>（2021/5-2022/7）期間，依據產品行銷部門需求，策劃與執行廣告及媒體行銷方案，主導從創意提案、文案撰寫、印刷請購到廣告審核的完整流程。橫跨 TVC、促銷影片、店內行銷與疫情溝通四大面向。` },
+      { label: '// IMPACT',
+        body: `<div>
+          <span class="impact-pill">📺 中元節 TVC 操盤</span>
+          <span class="impact-pill">🛒 全通路促銷整合</span>
+          <span class="impact-pill">🏪 店內行銷執行</span>
+          <span class="impact-pill">📣 疫情溝通管理</span>
+          <span class="impact-pill">🎨 品牌形象廣告</span>
+        </div>` }
+    ]
+  }
+};
+
+function openModal(key) {
+  const d = MODAL_DATA[key];
+  if (!d) return;
+  document.getElementById('modalHeadTitle').textContent = d.title;
+  document.getElementById('modalBodyContent').innerHTML = d.sections.map(s => `
+    <div class="m-section">
+      <div class="m-section-label">${s.label}</div>
+      <div class="m-section-body">${s.body}</div>
+    </div>
+  `).join('');
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleBgClick(e) {
+  if (e.target === document.getElementById('modalBg')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
